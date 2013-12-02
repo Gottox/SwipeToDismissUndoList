@@ -15,6 +15,9 @@
  */
 package de.timroes.swipetodismiss;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
@@ -32,19 +35,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import static com.nineoldandroids.view.ViewHelper.setAlpha;
-import static com.nineoldandroids.view.ViewHelper.setTranslationX;
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
 /**
  * A {@link android.view.View.OnTouchListener} that makes the list items in a
@@ -79,6 +75,7 @@ public final class SwipeDismissList implements View.OnTouchListener {
 	private boolean mPaused;
 	private float mDensity;
 	private boolean mSwipeDisabled;
+    private SwipeAdapter mSwipeAdapter;
 
 	private UndoMode mMode;
 	private List<Undoable> mUndoActions;
@@ -96,7 +93,15 @@ public final class SwipeDismissList implements View.OnTouchListener {
 
 	private int mDelayedMsgId;
 
-	/**
+    public SwipeAdapter getSwipeAdapter() {
+        return mSwipeAdapter;
+    }
+
+    public void setSwipeAdapter(SwipeAdapter swipeAdapter) {
+        this.mSwipeAdapter = swipeAdapter;
+    }
+
+    /**
 	 * Defines the mode a {@link SwipeDismissList} handles multiple undos.
 	 */
 	public enum UndoMode {
@@ -169,6 +174,10 @@ public final class SwipeDismissList implements View.OnTouchListener {
 		 */
 		Undoable onDismiss(AbsListView listView, int position);
 	}
+
+    public interface SwipeAdapter {
+        boolean isDismissable(int position);
+    }
 
 	/**
 	 * An implementation of this abstract class must be returned by the 
@@ -387,6 +396,8 @@ public final class SwipeDismissList implements View.OnTouchListener {
 		};
 	}
 
+    boolean mCurrentDismissable;
+
 	@Override
 	public boolean onTouch(View view, MotionEvent motionEvent) {
 		if (this.mSwipeDisabled) {
@@ -425,6 +436,7 @@ public final class SwipeDismissList implements View.OnTouchListener {
 				if (mDownView != null) {
 					mDownX = motionEvent.getRawX();
 					mDownPosition = mListView.getPositionForView(mDownView);
+                    mCurrentDismissable = mSwipeAdapter == null || mSwipeAdapter.isDismissable(mDownPosition);
 
 					mVelocityTracker = VelocityTracker.obtain();
 					mVelocityTracker.addMovement(motionEvent);
@@ -445,7 +457,8 @@ public final class SwipeDismissList implements View.OnTouchListener {
 				float velocityY = Math.abs(mVelocityTracker.getYVelocity());
 				boolean dismiss = false;
 				boolean dismissRight = false;
-				if (Math.abs(deltaX) > mViewWidth / 2 && mSwiping) {
+                if (mCurrentDismissable == false) {
+                } else if (Math.abs(deltaX) > mViewWidth / 2 && mSwiping) {
 					dismiss = true;
 					dismissRight = deltaX > 0;
 				} else if (mMinFlingVelocity <= velocityX && velocityX <= mMaxFlingVelocity
@@ -459,19 +472,19 @@ public final class SwipeDismissList implements View.OnTouchListener {
 					final View downView = mDownView; // mDownView gets null'd before animation ends
 					final int downPosition = mDownPosition;
 					++mDismissAnimationRefCount;
-					animate(mDownView)
+					mDownView.animate()
 						.translationX(dismissRight ? mViewWidth : -mViewWidth)
 						.alpha(0)
 						.setDuration(mAnimationTime)
-						.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							performDismiss(downView, downPosition);
-						}
-					});
+						.setListener(new android.animation.AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(android.animation.Animator animation) {
+                                performDismiss(downView, downPosition);
+                            }
+                        });
 				} else {
 					// cancel
-					animate(mDownView)
+					mDownView.animate()
 						.translationX(0)
 						.alpha(1)
 						.setDuration(mAnimationTime)
@@ -486,7 +499,7 @@ public final class SwipeDismissList implements View.OnTouchListener {
 			}
 
 			case MotionEvent.ACTION_MOVE: {
-				if(mTouchBeforeAutoHide && mUndoPopup.isShowing()) {	
+				if(mTouchBeforeAutoHide && mUndoPopup.isShowing()) {
 					// Send a delayed message to hide popup
 					mHandler.sendMessageDelayed(mHandler.obtainMessage(mDelayedMsgId), 
 						mAutoHideDelay);
@@ -519,9 +532,13 @@ public final class SwipeDismissList implements View.OnTouchListener {
 				}
 
 				if (mSwiping) {
-					setTranslationX(mDownView, deltaX);
-					setAlpha(mDownView, Math.max(0f, Math.min(1f,
-						1f - 2f * Math.abs(deltaX) / mViewWidth)));
+                    if(mCurrentDismissable) {
+                        mDownView.setTranslationX(deltaX);
+                        mDownView.setAlpha(Math.max(0f, Math.min(1f,
+                                1f - 2f * Math.abs(deltaX) / mViewWidth)));
+                    }
+                    else
+                        mDownView.setTranslationX(deltaX * 0.25f);
 					return true;
 				}
 				break;
@@ -629,8 +646,8 @@ public final class SwipeDismissList implements View.OnTouchListener {
 					ViewGroup.LayoutParams lp;
 					for (PendingDismissData pendingDismiss : mPendingDismisses) {
 						// Reset view presentation
-						setAlpha(pendingDismiss.view, 1f);
-						setTranslationX(pendingDismiss.view, 0);
+                        pendingDismiss.view.setAlpha(1f);
+                        pendingDismiss.view.setTranslationX(0);
 						lp = pendingDismiss.view.getLayoutParams();
 						lp.height = originalHeight;
 						pendingDismiss.view.setLayoutParams(lp);
