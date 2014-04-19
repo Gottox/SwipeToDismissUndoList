@@ -4,7 +4,7 @@ buildscript {
 	}
 
 	dependencies {
-		classpath 'com.android.tools.build:gradle:+'
+		classpath 'com.android.tools.build:gradle:0.9.+'
 	}
 }
 
@@ -21,8 +21,8 @@ dependencies {
 }
 
 android {
-	compileSdkVersion 18
-	android.buildToolsVersion "18.1.1"
+	compileSdkVersion 19
+	android.buildToolsVersion "19.0.3"
 	sourceSets {
 		main {
 			manifest.srcFile 'AndroidManifest.xml'
@@ -36,5 +36,5 @@ android {
 	}
 }
 task wrapper(type: Wrapper) {
-	gradleVersion = '1.8'
+	gradleVersion = '1.10'
 }
