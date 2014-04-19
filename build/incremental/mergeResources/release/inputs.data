@@ -1,0 +1,17 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1385491778000 1068 32cccd905e90f66ebf56a83fb59727132d12f0f3 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable-xhdpi/ic_action_undo.png
+1385491778000 3505 47b9d4d17ecccd7c79db095c4b4150bb42cc76b9 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable-ldpi/ic_action_undo.png
+1385491778000 545 b3fae751c900b1ab5db58654879ef2ec55b745c0 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable-mdpi/ic_action_undo.png
+1385491778000 342 0210e4f72dea31e4e5dcc3aa4b0f0df6e3b0bddd /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/values/colors.xml
+1385491778000 391 3a6eddfe5c2f65366abfb708103e6f76823e9cae /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable/undo_btn_bg.xml
+1385491778000 813 f528da4e6ebe6018e7b50640e537bc758c7dedbe /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable-hdpi/ic_action_undo.png
+1385491778000 192 9e138e761cbb791eeea8c112b49246bb3fc541a4 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable/undo_btn_bg_focused.xml
+1385491778000 229 cc9ec4f109e05e7bb5a8ef19f7bea29b9808fdc4 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/anim/popup_show.xml
+1385491778000 1195 42b936c79248d1cde1104f4c938fce4e391df694 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/layout/undo_popup.xml
+1385491778000 241 b20c97c3ace93b171e6c942cdf2284a407e5ae93 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/values/styles.xml
+1385491778000 229 95f5cc4c1b5aa9869e7c339e38ee40f4ebfc97ee /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/anim/popup_hide.xml
+1385491778000 195 15e52dba54fc50d67ebd33438162cadda2c0d16c /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable/popup_bg.xml
+1385491778000 140 4ca73efa067bd0c979e17aefa3b83190bb730d5a /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/values/strings.xml
+1385491778000 192 3f6d137b40870b4c4bd19be74aaa70c8d7d8a25f /Users/tox/src/FLAppProject/SwipeToDismissUndoList/res/drawable/undo_btn_bg_pressed.xml

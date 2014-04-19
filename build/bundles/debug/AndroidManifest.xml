@@ -1,0 +1,6 @@
+<!-- From: file:/Users/tox/src/FLAppProject/SwipeToDismissUndoList/AndroidManifest.xml -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="de.timroes.swipetodismiss">
+	<uses-sdk android:minSdkVersion="12"/>
+	<application>
+	</application>
+</manifest>

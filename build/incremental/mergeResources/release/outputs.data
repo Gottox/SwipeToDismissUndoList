@@ -1,0 +1,15 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1385932115000 299 54918d53de2bca08bfaf57c470cbdc216287a8d2 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable/undo_btn_bg_focused.xml
+1385932115000 995 5ac6c8ba9825131d4ac9480549a6f80af3fc9c47 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/values/values.xml
+1385932115000 490 7508242db29ee8b14361c4490da815c5f9e668bd /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable/undo_btn_bg.xml
+1385932115000 3505 47b9d4d17ecccd7c79db095c4b4150bb42cc76b9 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable-ldpi/ic_action_undo.png
+1385932115000 323 cb5aa70ac0dcdc06952d827413c87c63263dd7d7 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/anim/popup_hide.xml
+1385932115000 545 b3fae751c900b1ab5db58654879ef2ec55b745c0 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable-mdpi/ic_action_undo.png
+1385932115000 299 214f347449f256648a832a335b028adbf29ba865 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable/undo_btn_bg_pressed.xml
+1385932115000 291 0512f5608338c4aad5e79182de59bcfc4c1df6c2 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable/popup_bg.xml
+1385932115000 1068 32cccd905e90f66ebf56a83fb59727132d12f0f3 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable-xhdpi/ic_action_undo.png
+1385932115000 1291 0e1004b367314c46fb2853ab6ac7bb64ca6ef3d1 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/layout/undo_popup.xml
+1385932115000 813 f528da4e6ebe6018e7b50640e537bc758c7dedbe /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/drawable-hdpi/ic_action_undo.png
+1385932115000 323 09a27c363964988ae1744e7ae89d0cefc8a9bf57 /Users/tox/src/FLAppProject/SwipeToDismissUndoList/build/res/all/release/anim/popup_show.xml
